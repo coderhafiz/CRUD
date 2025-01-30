@@ -1,48 +1,68 @@
+"use client"; // ✅ Convert to a Client Component
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import RemoveBtn from "./RemoveBtn";
 import { HiPencilAlt } from "react-icons/hi";
 
-const getTopics = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+export default function TopicsList() {
+  const [topics, setTopics] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  try {
-    const res = await fetch(`${apiUrl}/api/topics`, {
-      cache: "no-store",
-    });
+  useEffect(() => {
+    const fetchTopics = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch topics");
-    }
+        const res = await fetch(`${apiUrl}/api/topics`, {
+          cache: "no-store",
+        });
 
-    return res.json();
-  } catch (error) {
-    console.log("Error loading topics: ", error);
-  }
-};
+        if (!res.ok) {
+          throw new Error("Failed to fetch topics");
+        }
 
-export default async function TopicsList() {
-  const { topics } = await getTopics();
+        const data = await res.json();
+        setTopics(data.topics); // ✅ Fix: Ensure correct data structure
+      } catch (err) {
+        console.error("Error loading topics:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTopics();
+  }, []);
+
+  if (loading) return <p>Loading topics...</p>;
+  if (error) return <p className="text-red-500">Error: {error}</p>;
 
   return (
     <>
-      {topics.map((t) => (
-        <div
-          key={t._id}
-          className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start"
-        >
-          <div>
-            <h2 className="font-bold text-2xl">{t.title}</h2>
-            <div>{t.description}</div>
-          </div>
+      {topics.length > 0 ? (
+        topics.map((t) => (
+          <div
+            key={t._id}
+            className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start"
+          >
+            <div>
+              <h2 className="font-bold text-2xl">{t.title}</h2>
+              <div>{t.description}</div>
+            </div>
 
-          <div className="flex gap-2">
-            <RemoveBtn id={t._id} />
-            <Link href={`/editTopic/${t._id}`}>
-              <HiPencilAlt size={24} />
-            </Link>
+            <div className="flex gap-2">
+              <RemoveBtn id={t._id} />
+              <Link href={`/editTopic/${t._id}`}>
+                <HiPencilAlt size={24} />
+              </Link>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p>No topics found.</p>
+      )}
     </>
   );
 }
