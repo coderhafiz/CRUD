@@ -13,8 +13,12 @@ export default function RemoveBtn({ id }) {
         method: "DELETE",
       });
 
+      console.log(res);
+
       if (res.ok) {
-        router.refresh();
+        router.push("/");
+      } else {
+        alert("Error deleting the topic");
       }
     }
   };
