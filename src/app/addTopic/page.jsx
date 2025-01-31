@@ -18,7 +18,7 @@ export default function AddTopic() {
     }
 
     try {
-      const res = await fetch("/api/topics", {
+      const res = await fetch("/.netlify/functions/data", {
         method: "POST",
         headers: {
           "Content-type": "application/json",

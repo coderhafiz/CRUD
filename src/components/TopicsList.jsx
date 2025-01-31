@@ -15,7 +15,7 @@ export default function TopicsList() {
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-        const res = await fetch(`${apiUrl}/api/topics`, {
+        const res = await fetch(`${apiUrl}/.netlify/functions/data`, {
           cache: "no-store",
         });
 

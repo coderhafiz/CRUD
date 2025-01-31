@@ -3,7 +3,7 @@ import EditTopicForm from "@/components/EditTopicForm";
 const getTopicById = async (id) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   try {
-    const res = await fetch(`${apiUrl}/api/topics/${id}`, {
+    const res = await fetch(`${apiUrl}/.netlify/functions/data/${id}`, {
       cache: "no-store",
     });
 
