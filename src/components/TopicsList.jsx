@@ -45,11 +45,11 @@ export default function TopicsList() {
         topics.map((t) => (
           <div
             key={t._id}
-            className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start"
+            className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start rounded-md"
           >
             <div>
-              <h2 className="font-bold text-2xl">{t.title}</h2>
-              <div>{t.description}</div>
+              <h2 className="font-bold text-2xl text-blue-500">{t.title}</h2>
+              <div className="">{t.description}</div>
             </div>
 
             <div className="flex gap-2">
