@@ -6,7 +6,10 @@ export default function Navbar() {
       <Link className="text-white font-bold" href={"/"}>
         CG MARK
       </Link>
-      <Link className="bg-white p-2 rounded-xl" href={"/addTopic"}>
+      <Link
+        className="bg-white p-2 rounded-xl active:scale-95"
+        href={"/addTopic"}
+      >
         New Topic
       </Link>
     </nav>
