@@ -50,7 +50,7 @@ export default function EditTopicForm({ id, title, description }) {
         placeholder="Topic Description"
       />
 
-      <button className="bg-green-600 font-bold text-white py-3 px-6 w-fit">
+      <button className="bg-green-600 font-bold text-white py-3 px-6 w-fit rounded-md active:scale-95">
         Update Topic
       </button>
     </form>
