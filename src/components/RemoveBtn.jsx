@@ -16,6 +16,8 @@ export default function RemoveBtn({ id }) {
       console.log(res);
 
       if (res.ok) {
+        router.refresh();
+
         router.push("/");
       } else {
         alert("Error deleting the topic");
