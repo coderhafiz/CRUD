@@ -18,7 +18,7 @@ export default function RemoveBtn({ id }) {
       if (res.ok) {
         router.refresh();
 
-        router.push("/");
+        // router.push("/");
       } else {
         alert("Error deleting the topic");
       }
@@ -26,8 +26,10 @@ export default function RemoveBtn({ id }) {
   };
 
   return (
-    <button onClick={removeTopic} className="text-red-400 active:scale-95">
-      <HiOutlineTrash size={24} />
-    </button>
+    <a href="/">
+      <button onClick={removeTopic} className="text-red-400 active:scale-95">
+        <HiOutlineTrash size={24} />
+      </button>
+    </a>
   );
 }
