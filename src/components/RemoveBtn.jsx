@@ -16,6 +16,8 @@ export default function RemoveBtn({ id }) {
       console.log(res);
 
       if (res.ok) {
+        console.log("working");
+
         router.refresh();
 
         // router.push("/");
