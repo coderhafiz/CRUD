@@ -6,6 +6,10 @@ import clientPromise from "./libs/db.js";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: MongoDBAdapter(clientPromise),
+  trustHost:
+    process.env.NODE_ENV === "development"
+      ? true // Allow local testing
+      : process.env.NEXTAUTH_URL,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
