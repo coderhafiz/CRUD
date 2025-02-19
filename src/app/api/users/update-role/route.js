@@ -1,6 +1,6 @@
-import connectMongoDB from "./../../../libs/mongodb.js";
-import User from "./../../../models/user.js";
-import { auth } from "./../../../auth.js";
+import connectMongoDB from "./../../../../libs/mongodb.js";
+import User from "./../../../../models/user.js";
+import { auth } from "./../../../../auth.js";
 import { NextResponse } from "next/server";
 
 export async function PUT(req) {
